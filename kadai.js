@@ -21,38 +21,34 @@ window.onload = function () {
     const addWorkBtn = () => {
         const td = document.createElement('td');
         const button = document.createElement('button');
-        listArea.lastElementChild.appendChild(td).appendChild(button);
-        listArea.lastElementChild.lastElementChild.lastElementChild.textContent = '作業中';
+        listArea.lastElementChild.appendChild(td).appendChild(button).textContent = '作業中';
         return button;
     };
     // 「作業中」ボタン押下時のイベントの追加
-    const addWorkEvent = (button) => {
+    const addWorkEvent = (button,index) => {
         button.addEventListener('click', function() {
-            const num = this.parentElement.parentElement.firstElementChild.textContent;
-            if (taskList[num].state === 0 ) {
+            if (taskList[index].state === 0 ) {
                 this.textContent = '完了'
-                taskList[num].state = 1;
-            } else if(taskList[num].state === 1) {
+                taskList[index].state = 1;
+            } else if(taskList[index].state === 1) {
                 this.textContent = '作業中'
-                taskList[num].state = 0;
-            }
+                taskList[index].state = 0;
+            };
+            putBtn();
         });
     };
     // 「削除」ボタンの追加
     const addRemoveBtn = () => {
         const td = document.createElement('td');
         const button = document.createElement('button');
-        listArea.lastElementChild.appendChild(td).appendChild(button);
-        listArea.lastElementChild.lastElementChild.lastElementChild.textContent = '削除';
+        listArea.lastElementChild.appendChild(td).appendChild(button).textContent = '削除';
         return button;
     };
     // 「削除」ボタン押下時のイベントの追加
-    const addRemoveEvent = (button) => {
+    const addRemoveEvent = (button,index) => {
         button.addEventListener('click', function() {
-            // クリックイベントが発生した要素のID(=対象オブジェクトのid)を取得
-            const num = this.parentElement.parentElement.firstElementChild.textContent;
             // 配列から対象の要素を削除して積める
-            taskList.splice( num, 1 );
+            taskList.splice( index, 1 );
             // 各タスクのidの降り直し
             for (let i = 0; i < taskList.length; i++) {
                 taskList[i].id = i;
@@ -67,7 +63,9 @@ window.onload = function () {
         listArea.innerHTML = '';
         // フォームの内容をからにする
         document.getElementById('task').value = '';
-        taskList.forEach(value => {
+        // 配列「タスクリスト」から条件に応じて繰り返し処理を行う
+        // 配列のindex番号(=taskのid)をforeachの第二引数とし、削除・作業中ボタンの動作処理に渡す
+        taskList.forEach((value,i) => {
             const repeat = () => {
                 const tr = document.createElement('tr');
                 listArea.appendChild(tr);
@@ -79,9 +77,9 @@ window.onload = function () {
                 if (value.state == 1) {
                     workBtn.textContent = '完了';
                 }
-                addWorkEvent(workBtn);
+                addWorkEvent(workBtn,i);
                 const removeBtn = addRemoveBtn();
-                addRemoveEvent(removeBtn);
+                addRemoveEvent(removeBtn,i);
             };
             if (btnAll.checked === true) {
                 repeat();
