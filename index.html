@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>ToDoリスト</h1>
+    <form name="form3">
+        <input type="radio" name="btn" id="btnAll" checked> <span>すべて</span>
+        <input type="radio" name="btn" id="btnWork" > <span>作業中</span>
+        <input type="radio" name="btn" id="btnComplete" > <span>完了</span>
+    </form>
+    <div>
+        <table>
+            <tbody>
+                <tr>
+                    <th>ID</th>
+                    <th>コメント</th>
+                    <th>状態</th>
+                    <th></th>
+                </tr>
+            </tbody>
+            <tbody id="listarea">
+            </tbody>
+        </table>
+    </div>
+    <h2>新規タスクの追加</h2>
+    <div>
+        <div>
+            <input id="task" type="text" style="width: 190px;">
+            <button id="addbtn">追加</button>
+        </div>
+    </div>
+    <script src="kadai.js"></script>
+</body>
+</html>
