@@ -34,7 +34,7 @@ window.onload = function () {
                 this.textContent = '作業中'
                 taskList[index].state = 0;
             };
-            putBtn();
+            displayTodos();
         });
     };
     // 「削除」ボタンの追加
@@ -54,11 +54,11 @@ window.onload = function () {
                 taskList[i].id = i;
             };
             // htmlへの再出力
-            putBtn();
+            displayTodos();
         });
     };
-    // ボタンが押下された時の処理
-    const putBtn = () => {
+    // TODOリストの出力処理
+    const displayTodos = () => {
         // タスクリストのタイトル部分以外を削除
         listArea.innerHTML = '';
         // フォームの内容をからにする
@@ -100,11 +100,11 @@ window.onload = function () {
         const taskValue = document.getElementById('task').value;
         // タスクの内容(taskValue)をタスクの追加関数(addTask)に渡す
         addTask(taskValue);
-        putBtn();
+        displayTodos();
     }
     document.getElementById('addbtn').addEventListener('click', addEvent);
     // ラジオボタンの操作
-    btnAll.addEventListener('click', putBtn);
-    btnWork.addEventListener('click', putBtn);
-    btnComplete.addEventListener('click', putBtn);
+    btnAll.addEventListener('click', displayTodos);
+    btnWork.addEventListener('click', displayTodos);
+    btnComplete.addEventListener('click', displayTodos);
 }
